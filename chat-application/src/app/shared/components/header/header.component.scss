@@ -1,0 +1,21 @@
+ul li a, a {
+    color: white;
+}
+
+.logout_btn {
+    cursor: pointer;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav_home {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.active {
+    background-color: rgb(139, 179, 240);
+    border-radius: 5px;
+}

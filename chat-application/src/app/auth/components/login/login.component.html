@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card col-md-4 bg-info">
+            <div class="card-header">
+                <h2 class="text-center">Login</h2>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="loginForm">
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email <span class="text-danger fw-bolder">*</span></label>
+                        <input type="text" class="form-control" formControlName="email" id="email"
+                            placeholder="Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password <span class="text-danger fw-bolder">*</span></label>
+                        <input type="text" class="form-control" formControlName="password" id="password"
+                            placeholder="Password">
+                    </div>
+
+                    <button class="btn btn-success mt-2 w-100" (click)="onLoginUser()"
+                        [disabled]="loginForm.invalid">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

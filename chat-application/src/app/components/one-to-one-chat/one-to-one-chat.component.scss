@@ -1,0 +1,50 @@
+.usersList {
+    display: block;
+    padding: 5px;
+}
+
+.inp_chat_msg {
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.users_list {
+    background-color: rgb(182, 218, 206);
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.msg_heading {
+    text-align: center;
+    background-color: aquamarine;
+}
+
+.chat_msg {
+    position: fixed;
+    left: 27%;
+    bottom: 0;
+    width: 70vw;
+}
+
+.right {
+    text-align: right;
+    margin-right: 5px;
+}
+
+.msg_input {
+    // border-bottom-left-radius: 10px;
+    // border-top-left-radius: 10px;
+    // border-top-right-radius: 0;
+    // border-bottom-right-radius: 0;
+    width: 75%;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+
+.msg_btn {
+    border-radius: 15px;
+    margin-left: 5px;
+    padding: 5px;
+    background-color: aquamarine;
+    width: 15%;
+}

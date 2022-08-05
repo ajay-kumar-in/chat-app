@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h2>Chat</h2>
+    <form [formGroup]="joinRoomForm">
+        <div class="mb-3">
+            <label for="userName" class="form-label">User Name</label>
+            <input type="text" class="form-control" formControlName="roomName" id="userName" aria-describedby="userHelp" placeholder="User Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="userName" class="form-label">User Name</label>
+            <input type="text" class="form-control" formControlName="userName" id="userName" aria-describedby="roomHelp" placeholder="Room">
+        </div>
+
+        <button (click)="onJoinRoom()">Join</button>
+    </form>
+</div>
