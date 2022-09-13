@@ -21,6 +21,7 @@ export class OneToOneChatComponent implements OnInit {
   isParticipantTyping: boolean = false;
   time: any;
   messageData: any;
+  @ViewChild('chat_messages_el') chat_messages_el: any;
 
   constructor(
     public webSocketService: WebSocketService,
@@ -31,7 +32,10 @@ export class OneToOneChatComponent implements OnInit {
   ngOnInit() {
     this.loggedInUser = JSON.parse(localStorage.getItem('user')!);
     this.webSocketService.listen('one-to-one-message').subscribe((data) => {
-      this.chatMessages.push(data)
+      this.chatMessages.push(data);
+      setTimeout(() => {
+        this.autoScroll();
+      }, 0)
       console.log('111111111111111111111111111', data, this.chatMessages);
     });
 
@@ -48,10 +52,43 @@ export class OneToOneChatComponent implements OnInit {
     this.getUsers();
   }
 
+  autoScroll = () => {
+    console.log('auto scroll fun');
+    // New message element
+    let newMessageEl = this.chat_messages_el.nativeElement;
+
+    // Height of the new message
+    const newMessageStyles = getComputedStyle(newMessageEl)
+    const newMessageMargin = parseInt(newMessageStyles.marginBottom)
+    const newMessageHeight = newMessageEl.offsetHeight + newMessageMargin
+
+    // Visible height
+    const $messages = <HTMLDivElement>document.querySelector('#messages')
+    const visibleHeight = $messages.offsetHeight
+
+    // Height of messages container
+    const containerHeight = $messages.scrollHeight
+
+    // How far have I scrolled?
+    const scrollOffset = $messages.scrollTop + visibleHeight
+
+    if (containerHeight - newMessageHeight <= scrollOffset) {
+      $messages.scrollTop = $messages.scrollHeight
+    }
+    // console.log(
+    //   'newMessageMargin', newMessageMargin,
+    //   'newMessageHeight', newMessageHeight,
+    //   'visibleHeight', visibleHeight,
+    //   'containerHeight', containerHeight,
+    //   '$messages.scrollTop', $messages.scrollTop
+    // );
+
+  }
+
   getUsers() {
     this.authService.getUsers().subscribe((res: any) => {
       if (res.data.length) {
-        this.users = res.data.filter((user: any)=> user.email !== this.loggedInUser.email);
+        this.users = res.data.filter((user: any) => user.email !== this.loggedInUser.email);
       }
     })
   }
@@ -87,14 +124,8 @@ export class OneToOneChatComponent implements OnInit {
     }
   }
 
-  // onTypingStopped() {
-  //   console.log('tttttttttttttttt', this);
-  //   this.typing = false;
-  //   this.webSocketService.emit('notTyping', 'this')
-  // }
-
   sendMsg() {
-    this.webSocketService.emit('one-to-one-message', this.messageData)
+    this.webSocketService.emit('one-to-one-message', this.messageData);
   }
 
 }

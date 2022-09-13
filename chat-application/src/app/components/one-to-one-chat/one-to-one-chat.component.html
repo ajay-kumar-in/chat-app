@@ -2,17 +2,21 @@
     <div class="row">
         <div class="col-md-3 users_list p-0">
             <h3 class="pl-4">Users</h3>
-            <span *ngFor="let user of users" class="usersList" (click)="selectChatUser(user)"><img src="" alt="Profile Picture">{{user.name}}</span>
+            <span *ngFor="let user of users" class="usersList" (click)="selectChatUser(user)">
+                <!-- <img src="" alt="Profile Picture"> -->
+                {{user.name}}</span>
         </div>
 
-        <div *ngIf="isParticipantSelected"  class="col-md-9 p-0 inp_chat_msg">
+        <div id="messages" *ngIf="isParticipantSelected" class="col-md-9 p-0 inp_chat_msg">
             <div class="chat_messages">
                 <h3 class="msg_heading">Chat - {{chatUser.name}}</h3>
-                <p [class]="{'right': chatMsgObj.fromUser === loggedInUser.email }" class="d-block m-1" *ngFor="let chatMsgObj of chatMessages">{{chatMsgObj.message}}</p>
+                <p #chat_messages_el [class]="{'right': chatMsgObj.fromUser === loggedInUser.email }"
+                    class="d-block m-1" *ngFor="let chatMsgObj of chatMessages">{{chatMsgObj.message}}</p>
             </div>
             <div class="chat_msg">
                 <p *ngIf="isParticipantTyping" class="p-0 m-0">Typing...</p>
-                <input class="msg_input" type="text" #messageVar name="" id="msg" (keyup)="onTyping()" placeholder="message" autocomplete="off" required>
+                <input class="msg_input" type="text" #messageVar name="" id="msg" (keyup)="onTyping()"
+                    placeholder="message" autocomplete="off" required>
                 <button class="msg_btn" (click)="sendMsg()" [disabled]="!messageVar.value">Send</button>
             </div>
         </div>
